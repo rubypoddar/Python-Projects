@@ -662,15 +662,14 @@ This Python script calculates the molecular weight of a DNA or RNA sequence base
 - Prompts the user to input the DNA/RNA sequence and specify if it's RNA.
 - Handles user input validation to ensure correct sequence type identification.
 
-## Flowchart
 ```mermaid
 flowchart TD
-    A[Start] --> B[Input DNA/RNA Sequence]
+    A[Start] --> B["Input DNA/RNA Sequence"]
     B --> C{Is it RNA?}
-    C -->|Yes| D[Calculate Molecular Weight (RNA)]
-    D --> E[Display Molecular Weight]
-    C -->|No| F[Calculate Molecular Weight (DNA)]
-    F --> E
+    C -->|Yes| D["Calculate Molecular Weight (RNA)"]
+    D --> E["Display Molecular Weight (RNA)"]
+    C -->|No| F["Calculate Molecular Weight (DNA)"]
+    F --> E["Display Molecular Weight (DNA)"]
     E --> G[End]
 ```
 
@@ -767,13 +766,16 @@ This Python script calculates the melting temperature (Tm) of a DNA sequence usi
 - Validates input and calculates Tm based on the provided sequence.
 
 ## Flowchart
+
+
 ```mermaid
 flowchart TD
-    A[Start] --> B[Input DNA Sequence]
-    B --> C[Calculate Melting Temperature (Tm)]
-    C --> D[Display Tm]
+    A[Start] --> B["Input DNA Sequence"]
+    B --> C["Calculate Melting Temperature (Tm)"]
+    C --> D["Display Tm"]
     D --> E[End]
 ```
+
 
 ## Required
 - ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
@@ -958,3 +960,1247 @@ Suppose we have:
 - ![tkinter](https://img.shields.io/badge/tkinter-Standard%20Library-blue?style=for-the-badge&logo=python&logoColor=white)
 
 ---
+
+
+# ELISA Standard Curve Calculator
+
+## Overview
+This Python script generates a standard curve for ELISA assays based on provided concentration and absorbance values. It fits a linear regression model to the data points, allowing estimation of sample concentrations from absorbance readings.
+
+## Dependencies
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![numpy](https://img.shields.io/badge/numpy-1.x-blue?style=for-the-badge&logo=numpy&logoColor=white)
+- ![matplotlib](https://img.shields.io/badge/matplotlib-3.x-blue?style=for-the-badge&logo=matplotlib&logoColor=white)
+
+## Installation
+1. Ensure Python 3.x is installed on your system.
+2. Install required libraries:
+    ```bash
+    pip install numpy matplotlib
+    ```
+
+## Usage
+1. Run the script:
+    ```bash
+    python elisa_standard_curve.py
+    ```
+
+2. Enter the number of standard curve points and provide concentration (ng/mL) and absorbance values for each point as prompted.
+3. Input the absorbance value of the sample to estimate its concentration.
+4. The script will display the standard curve plot and the estimated concentration of the sample.
+
+## Code Explanation
+### `standard_curve`
+- Fits a linear regression model to the provided concentration and absorbance values.
+- Returns the slope and intercept of the standard curve.
+
+### `analyze_sample`
+- Estimates the concentration of a sample based on its absorbance using the slope and intercept of the standard curve.
+
+### Plotting
+- Generates a scatter plot of the standard curve points and overlays a linear fit line.
+- Displays the plot with appropriate labels and title.
+
+## Flowchart
+```mermaid
+flowchart TD
+    A[Start] --> B[Input Standard Curve Points]
+    B --> C[Fit Standard Curve]
+    C --> D[Plot Standard Curve]
+    D --> E[Input Sample Absorbance]
+    E --> F[Estimate Sample Concentration]
+    F --> G[Display Results]
+```
+
+## Example
+Suppose we have:
+- Standard curve points:
+  - Concentration: [10, 20, 30, 40, 50] ng/mL
+  - Absorbance: [0.1, 0.2, 0.3, 0.4, 0.5]
+- Sample absorbance: 0.35
+- Output:
+  - Estimated concentration of sample: 35.00 ng/mL
+
+---
+
+
+# ELISA Plate Calculator
+
+## Overview
+This Python script assists in designing ELISA experiments by calculating reagent volumes required for each well on the ELISA plate. It takes into account the sample volume, sample concentration, antibody volume, antibody concentration, and substrate volume.
+
+## Dependencies
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![numpy](https://img.shields.io/badge/numpy-1.x-blue?style=for-the-badge&logo=numpy&logoColor=white)
+- ![pandas](https://img.shields.io/badge/pandas-1.x-red?style=for-the-badge&logo=pandas&logoColor=white)
+- ![matplotlib](https://img.shields.io/badge/matplotlib-3.x-blue?style=for-the-badge&logo=matplotlib&logoColor=white)
+
+## Installation
+1. Ensure Python 3.x is installed on your system.
+2. Install required libraries:
+    ```bash
+    pip install numpy pandas matplotlib
+    ```
+
+## Usage
+1. Run the script:
+    ```bash
+    python elisa_plate_calculator.py
+    ```
+
+2. Follow the prompts to enter the required parameters:
+   - Volume of sample to be added to each well (in μL).
+   - Concentration of sample (in ng/mL).
+   - Volume of antibody to be added to each well (in μL).
+   - Concentration of antibody (in μg/mL).
+   - Volume of substrate to be added to each well (in μL).
+
+3. The script will calculate and display the reagent volumes for each well in a tabular format and visualize them using a heatmap.
+
+## Code Explanation
+### `calculate_reagent_volumes`
+- Computes the volumes of sample, antibody, and substrate for each well on the ELISA plate based on user inputs.
+- Uses numpy arrays and pandas DataFrame to manage and present the data.
+
+### Input Handling
+- Prompts the user to input parameters necessary for the ELISA plate setup.
+- Provides error handling for invalid input values.
+
+### Plotting
+- Generates a heatmap using matplotlib to visually represent the calculated reagent volumes across the plate.
+
+## Flowchart
+```mermaid
+flowchart TD
+    A[Start] --> B[Input Parameters]
+    B --> C[Calculate Reagent Volumes]
+    C --> D[Display Reagent Volumes]
+    D --> E[Display Heatmap]
+```
+
+## Example
+Suppose we input:
+- Sample volume: 10 μL
+- Sample concentration: 100 ng/mL
+- Antibody volume: 5 μL
+- Antibody concentration: 50 μg/mL
+- Substrate volume: 20 μL
+
+The script will compute and display the reagent volumes for each well and show a heatmap visualizing these volumes.
+
+---
+
+# Enzyme Activity Calculator
+
+## Overview
+This tkinter-based application calculates the enzyme activity based on substrate concentration, enzyme concentration, and reaction time. It provides a simple interface for researchers and scientists to quickly compute enzyme activity for experimental setups.
+
+## Dependencies
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![tkinter](https://img.shields.io/badge/tkinter-Standard%20Library-blue?style=for-the-badge&logo=python&logoColor=white)
+
+## Installation
+1. Ensure Python 3.x is installed on your system.
+2. No additional libraries are required as tkinter is included in Python's standard library.
+
+## Usage
+1. Run the script:
+    ```bash
+    python enzyme_activity_calculator.py
+    ```
+
+2. Enter the substrate concentration, enzyme concentration, and reaction time in the respective fields.
+3. Click the "Calculate" button to compute the enzyme activity.
+4. The calculated enzyme activity will be displayed below the button.
+
+## Code Explanation
+### `calculate_enzyme_activity`
+- Retrieves input values for substrate concentration, enzyme concentration, and reaction time from tkinter Entry widgets.
+- Calculates the enzyme activity using the formula:
+  \[ \text{Enzyme Activity} = \frac{\text{Substrate Concentration}}{\text{Reaction Time} \times \text{Enzyme Concentration}} \]
+- Handles exceptions for invalid input values.
+
+### GUI Components
+- **Labels and Entries:** tkinter widgets for entering substrate concentration, enzyme concentration, and reaction time.
+- **Calculate Button:** Executes the `calculate_enzyme_activity` function when clicked.
+- **Result Label:** Displays the calculated enzyme activity.
+
+### Flowchart
+```mermaid
+flowchart TD
+    A[Start] --> B[Input Substrate Concentration, Enzyme Concentration, Reaction Time]
+    B --> C[Calculate Enzyme Activity]
+    C --> D[Display Enzyme Activity]
+```
+
+## Example
+Suppose we input:
+- Substrate Concentration: 100 μM
+- Enzyme Concentration: 10 μg/mL
+- Reaction Time: 30 minutes
+
+The script will compute and display the enzyme activity based on these inputs.
+
+## Required
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![tkinter](https://img.shields.io/badge/tkinter-Standard%20Library-blue?style=for-the-badge&logo=python&logoColor=white)
+
+---
+
+
+# Enzyme Kinetics Calculator
+
+## Overview
+This tkinter-based application calculates the enzyme kinetics using the Michaelis-Menten equation based on user-provided substrate concentrations, maximum reaction rate (vmax), and Michaelis constant (km). It visualizes the enzyme kinetics curve for analysis.
+
+## Dependencies
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![numpy](https://img.shields.io/badge/numpy-1.x-blue?style=for-the-badge&logo=numpy&logoColor=white)
+- ![matplotlib](https://img.shields.io/badge/matplotlib-3.x-blue?style=for-the-badge&logo=matplotlib&logoColor=white)
+- ![tkinter](https://img.shields.io/badge/tkinter-Standard%20Library-blue?style=for-the-badge&logo=python&logoColor=white)
+
+## Installation
+1. Ensure Python 3.x is installed on your system.
+2. Install required libraries:
+   ```bash
+   pip install numpy matplotlib
+   ```
+
+## Usage
+1. Run the script:
+   ```bash
+   python enzyme_kinetics_calculator.py
+   ```
+
+2. Enter the substrate concentrations (comma-separated), vmax, and km in the respective fields.
+3. Click the "Analyze" button to compute and visualize the enzyme kinetics curve.
+4. The application will display the plot showing the relationship between substrate concentration and reaction rate.
+
+## Code Explanation
+### `michaelis_menten`
+- Calculates the reaction rate using the Michaelis-Menten equation:
+  \[ \text{Reaction Rate} = \frac{\text{vmax} \times \text{Substrate Concentration}}{\text{km} + \text{Substrate Concentration}} \]
+- Takes arrays of substrate concentrations, vmax, and km as inputs.
+
+### `plot_enzyme_kinetics`
+- Plots the enzyme kinetics curve using matplotlib.
+- Visualizes the relationship between substrate concentration and reaction rate.
+
+### GUI Components
+- **Labels and Entries:** tkinter widgets for entering substrate concentrations, vmax, and km.
+- **Analyze Button:** Executes the `analyze_enzyme_kinetics` function when clicked.
+- **Error Handling:** Displays an error message box for invalid inputs using tkinter's `messagebox`.
+
+### Flowchart
+```mermaid
+flowchart TD
+    A[Start] --> B[Input Substrate Concentrations, vmax, km]
+    B --> C[Calculate Reaction Rate using Michaelis-Menten]
+    C --> D[Plot Enzyme Kinetics Curve]
+```
+
+## Example
+Suppose we input:
+- Substrate Concentrations: 1, 2, 3, 4, 5 (comma-separated)
+- vmax: 10
+- km: 2
+
+The script will compute and display the enzyme kinetics curve based on these inputs.
+
+## Required
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![numpy](https://img.shields.io/badge/numpy-1.x-blue?style=for-the-badge&logo=numpy&logoColor=white)
+- ![matplotlib](https://img.shields.io/badge/matplotlib-3.x-blue?style=for-the-badge&logo=matplotlib&logoColor=white)
+- ![tkinter](https://img.shields.io/badge/tkinter-Standard%20Library-blue?style=for-the-badge&logo=python&logoColor=white)
+
+---
+
+# FRET Efficiency Calculator
+
+## Overview
+This Python script calculates the Förster Resonance Energy Transfer (FRET) efficiency based on the distance between donor and acceptor fluorophores (`distance`), and the Förster distance (`R0`). It utilizes the formula incorporating the orientation factor (`kappa2`) for the calculation.
+
+## Dependencies
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![numpy](https://img.shields.io/badge/numpy-1.x-blue?style=for-the-badge&logo=numpy&logoColor=white)
+
+## Installation
+1. Ensure Python 3.x is installed on your system.
+2. Install required libraries:
+   ```bash
+   pip install numpy
+   ```
+
+## Usage
+1. Run the script:
+   ```bash
+   python fret_efficiency_calculator.py
+   ```
+
+2. Enter the distance (`Å`) between donor and acceptor fluorophores and the Förster distance (`R0`).
+3. The script will calculate and display the FRET efficiency.
+
+## Code Explanation
+### `calculate_fret_efficiency`
+- Calculates the FRET efficiency using the formula:
+  \[ \text{FRET Efficiency} = \frac{1}{1 + \left(\frac{\text{distance}}{\text{R0}}\right)^6 \cdot \kappa^2} \]
+- Default value for `kappa2` is set to 2/3, representing freely rotating fluorophores.
+
+### Input Handling
+- Prompts the user to input the distance and Förster distance.
+- Handles user input validation to ensure correct numeric inputs.
+
+### Flowchart
+```mermaid
+flowchart TD
+    A[Start] --> B[Input Distance (Å) and Förster Distance (Å)]
+    B --> C[Calculate FRET Efficiency]
+    C --> D[Display FRET Efficiency]
+```
+
+## Example
+Suppose we input:
+- Distance: 50 Å
+- R0: 45 Å
+
+The script will compute and display the FRET efficiency based on these inputs.
+
+## Required
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![numpy](https://img.shields.io/badge/numpy-1.x-blue?style=for-the-badge&logo=numpy&logoColor=white)
+
+---
+
+
+# Gel Extraction Yield Calculator
+
+## Overview
+This Python tkinter application calculates the extraction yield of DNA based on inputs of elution buffer volume, DNA concentration, and eluate volume. It multiplies these values to determine the total extraction yield in nanograms (ng).
+
+## Dependencies
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![tkinter](https://img.shields.io/badge/tkinter-Standard-green?style=for-the-badge)
+
+## Installation
+1. Ensure Python 3.x is installed on your system.
+2. No additional libraries are required beyond the standard Python installation.
+
+## Usage
+1. Run the script:
+   ```bash
+   python gel_extraction_yield_calculator.py
+   ```
+
+2. Enter the following parameters in the tkinter GUI:
+   - Elution Buffer Volume (µL)
+   - DNA Concentration (ng/µL)
+   - Eluate Volume (µL)
+   
+3. Click the "Calculate" button to compute the extraction yield.
+4. The GUI will display the calculated extraction yield in nanograms (ng).
+
+## Code Explanation
+### `calculate_extraction_yield`
+- Retrieves input values from tkinter entry fields (`entry_elution_buffer`, `entry_concentration`, `entry_eluate_volume`).
+- Calculates the extraction yield using the formula: `extraction_yield = elution_buffer_volume * dna_concentration * eluate_volume`.
+- Updates the `label_result` to display the calculated extraction yield.
+
+### Input Handling
+- Ensures all input values are converted to `float` for numerical calculations.
+- Includes error handling for invalid input values to maintain program stability.
+
+### Flowchart
+```mermaid
+flowchart TD
+    A[Start] --> B[Input Elution Buffer Volume (µL)]
+    B --> C[Input DNA Concentration (ng/µL)]
+    C --> D[Input Eluate Volume (µL)]
+    D --> E[Calculate Extraction Yield]
+    E --> F[Display Extraction Yield]
+```
+
+## Example
+Suppose we input:
+- Elution Buffer Volume: 100 µL
+- DNA Concentration: 50 ng/µL
+- Eluate Volume: 200 µL
+
+The GUI will compute and display the extraction yield based on these inputs.
+
+## Required
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![tkinter](https://img.shields.io/badge/tkinter-Standard-green?style=for-the-badge)
+
+---
+
+# Generation Time Calculator
+
+## Overview
+This Python script calculates the generation time of a population based on its doubling time, initial population, and final population. It uses the formula derived from exponential growth dynamics to compute the generation time in hours.
+
+## Dependencies
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![math](https://img.shields.io/badge/math-Standard-green?style=for-the-badge)
+
+## Installation
+1. Ensure Python 3.x is installed on your system.
+2. No additional libraries beyond the standard Python installation are required.
+
+## Usage
+1. Run the script:
+   ```bash
+   python generation_time_calculator.py
+   ```
+
+2. Enter the following parameters when prompted:
+   - Doubling Time (in hours)
+   - Initial Population
+   - Final Population
+
+3. The script will calculate and display the generation time in hours based on the provided inputs.
+
+## Code Explanation
+### `calculate_generation_time`
+- Computes the generation time using the formula:
+  ```
+  generation_time = doubling_time / (log2(final_population) - log2(initial_population))
+  ```
+- Handles potential `ValueError` exceptions when logarithms of population values are not greater than 0.
+
+### Input Handling
+- Prompts the user to input numerical values for doubling time, initial population, and final population.
+- Validates input to ensure numeric values are entered.
+
+## Example
+Suppose we input:
+- Doubling Time: 1.5 hours
+- Initial Population: 1000
+- Final Population: 8000
+
+The script will calculate the generation time and display:
+```
+Generation Time: 1.16 hours
+```
+
+## Required
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![math](https://img.shields.io/badge/math-Standard-green?style=for-the-badge)
+
+---
+
+# Gibbs Free Energy Calculator
+
+## Overview
+This Python script calculates the Gibbs free energy change for a chemical reaction based on the Gibbs free energy of formation values for reactants and products.
+
+## Flowchart
+```mermaid
+flowchart TD
+    A[Start] --> B[Initialize Calculator]
+    B --> C[Get Input for Reactants and Products]
+    C --> D[Calculate Gibbs Free Energy Change]
+    D --> E[Output Gibbs Free Energy Change]
+    E --> F[End]
+```
+
+## Class: `GibbsFreeEnergyCalculator`
+### `__init__`
+- Initializes with a dictionary containing Gibbs free energy of formation values for various chemical species.
+
+### `calculate_gibbs_free_energy`
+- Calculates the Gibbs free energy change for a chemical reaction using reactants and products provided.
+
+## Function: `get_input`
+- Collects user input for reactants and products, including their coefficients.
+
+## Function: `main`
+- Main function orchestrating the calculator's workflow:
+  - Initializes the `GibbsFreeEnergyCalculator`.
+  - Retrieves user input for reactants and products.
+  - Calculates the Gibbs free energy change.
+  - Outputs the calculated Gibbs free energy change.
+
+## Usage
+1. Run the script:
+   ```bash
+   python gibbs_free_energy_calculator.py
+   ```
+
+2. Follow the prompts to enter:
+   - Number of reactants and their coefficients.
+   - Number of products and their coefficients.
+
+3. The script will compute and display the Gibbs free energy change for the reaction in kJ/mol.
+
+## Example
+Suppose we input:
+- Reactants: H2, O2
+- Products: H2O
+
+The script will calculate the Gibbs free energy change and display:
+```
+Gibbs Free Energy Change: -150.00 kJ/mol
+```
+
+---
+
+# Henderson-Hasselbalch Equation Calculator
+
+## Overview
+This Python tkinter application calculates the pH of a buffer solution using the Henderson-Hasselbalch equation. It takes inputs for the pKa (dissociation constant of the weak acid), acid concentration, and base concentration in moles per liter (M).
+
+## Dependencies
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![tkinter](https://img.shields.io/badge/tkinter-Standard-green?style=for-the-badge)
+
+## Installation
+1. Ensure Python 3.x is installed on your system.
+2. No additional libraries are required beyond the standard Python installation.
+
+## Usage
+1. Run the script:
+   ```bash
+   python henderson_hasselbalch_calculator.py
+   ```
+
+2. Enter the following parameters in the tkinter GUI:
+   - pKa: The dissociation constant of the weak acid.
+   - Acid Concentration (M): Concentration of the weak acid in moles per liter.
+   - Base Concentration (M): Concentration of the conjugate base in moles per liter.
+   
+3. Click the "Calculate pH" button to compute the pH of the buffer solution.
+4. The GUI will display the calculated pH of the buffer solution.
+
+## Code Explanation
+### `henderson_hasselbalch`
+- Computes the pH using the Henderson-Hasselbalch equation:
+  ```python
+  pH = pKa + np.log10(base_concentration / acid_concentration)
+  ```
+- Returns the calculated pH value.
+
+### `calculate_pH`
+- Retrieves user inputs (`pKa`, `acid_concentration`, `base_concentration`) from tkinter entry fields (`pKa_entry`, `acid_conc_entry`, `base_conc_entry`).
+- Calls `henderson_hasselbalch` to compute the pH.
+- Updates `result_label` to display the computed pH value with two decimal places.
+
+### Input Handling
+- Ensures all input values are converted to `float` for numerical calculations.
+- Provides error handling for invalid input values, displaying a message in `result_label` if non-numeric values are entered.
+
+### Flowchart
+```mermaid
+flowchart TD
+    A[Start] --> B[Input pKa]
+    B --> C[Input Acid Concentration (M)]
+    C --> D[Input Base Concentration (M)]
+    D --> E[Calculate pH]
+    E --> F[Display pH]
+```
+
+## Example
+Suppose we input:
+- pKa: 4.76
+- Acid Concentration (M): 0.1
+- Base Concentration (M): 0.05
+
+The GUI will compute and display the pH of the buffer solution based on these inputs.
+
+## Required
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![tkinter](https://img.shields.io/badge/tkinter-Standard-green?style=for-the-badge)
+
+---
+
+# Isoelectric Focusing Calculator
+
+## Overview
+This Python tkinter application calculates the theoretical isoelectric point (pI) of an amino acid sequence. It uses a dictionary of pI values for standard amino acids to compute the average pI of the sequence entered.
+
+## Dependencies
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![tkinter](https://img.shields.io/badge/tkinter-Standard-green?style=for-the-badge)
+
+## Installation
+1. Ensure Python 3.x is installed on your system.
+2. No additional libraries are required beyond the standard Python installation.
+
+## Usage
+1. Run the script:
+   ```bash
+   python isoelectric_focusing_calculator.py
+   ```
+
+2. Enter an amino acid sequence into the tkinter GUI.
+   
+3. Click the "Calculate pI" button to compute the theoretical pI of the sequence.
+4. The GUI will display the computed theoretical pI of the amino acid sequence.
+
+## Code Explanation
+### `calculate_pI`
+- Retrieves the amino acid sequence from the tkinter entry field (`sequence_entry`).
+- Checks if the sequence consists only of standard amino acids.
+- Calculates the theoretical pI using the average of the pI values from `amino_acid_pI`.
+
+### `on_calculate`
+- Retrieves the amino acid sequence from the tkinter entry field (`sequence_entry`).
+- Validates the sequence against the `amino_acid_pI` dictionary.
+- Calls `calculate_pI` to compute the pI and updates `result_label` with the computed pI or an error message for invalid sequences.
+
+### Input Handling
+- Ensures the amino acid sequence entered consists only of standard amino acids (`amino_acid_pI` keys).
+- Provides feedback to the user through `result_label` for valid and invalid sequences.
+
+### Flowchart
+```mermaid
+flowchart TD
+    A[Start] --> B[Input Amino Acid Sequence]
+    B --> C[Validate Sequence]
+    C --> D[Calculate pI]
+    D --> E[Display pI]
+```
+
+## Example
+Suppose we input:
+- Amino Acid Sequence: "GLYALA"
+
+The GUI will compute and display the theoretical pI based on these inputs.
+
+## Required
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![tkinter](https://img.shields.io/badge/tkinter-Standard-green?style=for-the-badge)
+
+---
+
+
+# Protein Isoelectric Point Calculator
+
+## Overview
+This Python script calculates the isoelectric point (pI) of a given protein sequence using the BioPython library. It utilizes the `ProteinAnalysis` class from `Bio.SeqUtils.ProtParam` to compute the pI and formats the output into a pandas DataFrame for clear presentation.
+
+## Dependencies
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![BioPython](https://img.shields.io/badge/BioPython-1.x-green?style=for-the-badge)
+- ![pandas](https://img.shields.io/badge/pandas-Latest-green?style=for-the-badge)
+
+## Installation
+1. Ensure Python 3.x is installed on your system.
+2. Install BioPython using pip:
+   ```bash
+   pip install biopython
+   ```
+3. Install pandas using pip:
+   ```bash
+   pip install pandas
+   ```
+
+## Usage
+1. Run the script:
+   ```bash
+   python protein_isoelectric_point_calculator.py
+   ```
+
+2. Enter the protein sequence when prompted.
+
+3. The script will compute the isoelectric point (pI) and display it along with the protein sequence in a formatted pandas DataFrame.
+
+## Code Explanation
+### `calculate_isoelectric_point`
+- Uses `ProteinAnalysis` from BioPython to create an instance for the given protein sequence.
+- Calculates the pI using `protein_analyzer.isoelectric_point()`.
+
+### Input Handling
+- Accepts a protein sequence input from the user.
+- Validates the input and calculates the pI using `calculate_isoelectric_point`.
+
+### Output Formatting
+- Creates a pandas DataFrame (`df_output`) with columns for 'Parameter' and 'Value' to display the protein sequence and its calculated pI.
+
+## Example
+Suppose we input:
+- Protein Sequence: "MAEGEITTFTALTEKFNLPPGNYKKPKLLYCSNGGHFLRILPDGTVDGTRDRSDQHIQLQLSAESVGEVYIKSTETGQYLAMDTSGLLYGSQTPSEECLFLERLEENHYNTYTSKKHAEKNWFVGLKKNGSCKRGPRTHYGQKAILFLPLPV"
+
+The script will compute and display the isoelectric point (pI) of the protein sequence.
+
+## Required
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![BioPython](https://img.shields.io/badge/BioPython-1.x-green?style=for-the-badge)
+- ![pandas](https://img.shields.io/badge/pandas-Latest-green?style=for-the-badge)
+
+---
+
+
+# Protein Isoelectric Point Calculator
+
+## Overview
+This Python script calculates the isoelectric point (pI) of a given protein sequence using the BioPython library. It utilizes the `ProteinAnalysis` class from `Bio.SeqUtils.ProtParam` to compute the pI and formats the output into a pandas DataFrame for clear presentation.
+
+## Dependencies
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![BioPython](https://img.shields.io/badge/BioPython-1.x-green?style=for-the-badge)
+- ![pandas](https://img.shields.io/badge/pandas-Latest-green?style=for-the-badge)
+
+## Installation
+1. Ensure Python 3.x is installed on your system.
+2. Install BioPython using pip:
+   ```bash
+   pip install biopython
+   ```
+3. Install pandas using pip:
+   ```bash
+   pip install pandas
+   ```
+
+## Usage
+1. Run the script:
+   ```bash
+   python protein_isoelectric_point_calculator.py
+   ```
+
+2. Enter the protein sequence when prompted.
+
+3. The script will compute the isoelectric point (pI) and display it along with the protein sequence in a formatted pandas DataFrame.
+
+## Code Explanation
+### `calculate_isoelectric_point`
+- Uses `ProteinAnalysis` from BioPython to create an instance for the given protein sequence.
+- Calculates the pI using `protein_analyzer.isoelectric_point()`.
+
+### Input Handling
+- Accepts a protein sequence input from the user.
+- Validates the input and calculates the pI using `calculate_isoelectric_point`.
+
+### Output Formatting
+- Creates a pandas DataFrame (`df_output`) with columns for 'Parameter' and 'Value' to display the protein sequence and its calculated pI.
+
+## Example
+Suppose we input:
+- Protein Sequence: "MAEGEITTFTALTEKFNLPPGNYKKPKLLYCSNGGHFLRILPDGTVDGTRDRSDQHIQLQLSAESVGEVYIKSTETGQYLAMDTSGLLYGSQTPSEECLFLERLEENHYNTYTSKKHAEKNWFVGLKKNGSCKRGPRTHYGQKAILFLPLPV"
+
+The script will compute and display the isoelectric point (pI) of the protein sequence.
+
+## Required
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![BioPython](https://img.shields.io/badge/BioPython-1.x-green?style=for-the-badge)
+- ![pandas](https://img.shields.io/badge/pandas-Latest-green?style=for-the-badge)
+
+---
+
+
+# Michaelis-Menten Equation Solver
+
+## Overview
+This Python tkinter application solves the Michaelis-Menten equation to calculate the reaction rate based on user-provided substrate concentration, maximum reaction rate (vmax), and Michaelis constant (Km).
+
+## Dependencies
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![tkinter](https://img.shields.io/badge/tkinter-Standard-green?style=for-the-badge)
+
+## Installation
+1. Ensure Python 3.x is installed on your system.
+
+## Usage
+1. Run the script:
+   ```bash
+   python michaelis_menten_solver.py
+   ```
+
+2. Enter the following parameters in the tkinter GUI:
+   - Substrate Concentration
+   - Maximum Reaction Rate (vmax)
+   - Michaelis Constant (Km)
+
+3. Click the "Calculate" button to compute the reaction rate.
+
+4. The GUI will display the calculated reaction rate.
+
+## Code Explanation
+### `michaelis_menten`
+- Implements the Michaelis-Menten equation:
+  ```
+  reaction_rate = (vmax * substrate_concentration) / (km + substrate_concentration)
+  ```
+- Returns the reaction rate based on the provided parameters.
+
+### `calculate_reaction_rate`
+- Retrieves input values from tkinter entry fields (`substrate_entry`, `vmax_entry`, `km_entry`).
+- Calls `michaelis_menten` to compute the reaction rate.
+- Updates the `result_label` to display the calculated reaction rate.
+
+### Input Handling
+- Ensures all input values are converted to `float` for numerical calculations.
+- Includes error handling using tkinter `messagebox` for invalid input values.
+
+### Flowchart
+```mermaid
+flowchart TD
+    A[Start] --> B[Input Substrate Concentration]
+    B --> C[Input Maximum Reaction Rate (vmax)]
+    C --> D[Input Michaelis Constant (Km)]
+    D --> E[Calculate Reaction Rate]
+    E --> F[Display Reaction Rate]
+```
+
+## Example
+Suppose we input:
+- Substrate Concentration: 10
+- Maximum Reaction Rate (vmax): 20
+- Michaelis Constant (Km): 5
+
+The GUI will compute and display the reaction rate based on these inputs.
+
+## Required
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![tkinter](https://img.shields.io/badge/tkinter-Standard-green?style=for-the-badge)
+
+---
+
+# Molarity Calculator
+
+## Overview
+This Python tkinter application calculates the molarity of a solution based on user inputs for the mass of the solute, molecular weight of the solute, and volume of the solvent. It provides a graphical user interface (GUI) for easy interaction and calculation.
+
+## Dependencies
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![tkinter](https://img.shields.io/badge/tkinter-Standard-green?style=for-the-badge)
+
+## Installation
+1. Ensure Python 3.x is installed on your system.
+
+## Usage
+1. Run the script:
+   ```bash
+   python molarity_calculator.py
+   ```
+
+2. Enter the following parameters in the tkinter GUI:
+   - Mass of Solute (in grams)
+   - Molecular Weight of Solute (in g/mol)
+   - Volume of Solvent (in liters)
+
+3. Click the "Calculate Molarity" button to compute the molarity of the solution.
+
+4. The GUI will display the calculated molarity in moles per liter (moles/L).
+
+## Flowchart
+```mermaid
+flowchart TD
+    A[Start] --> B[Input Mass of Solute (g)]
+    B --> C[Input Molecular Weight (g/mol)]
+    C --> D[Input Volume of Solvent (L)]
+    D --> E[Calculate Molarity]
+    E --> F[Display Molarity]
+```
+
+## Code Explanation
+### `calculate_molarity`
+- Computes the molarity using the formula: `molarity = (mass_solute / molecular_weight) / volume_solvent`.
+
+### `on_calculate`
+- Retrieves input values from tkinter entry fields (`mass_entry`, `molecular_weight_entry`, `volume_entry`).
+- Calls `calculate_molarity` to compute the molarity.
+- Updates the `result_label` to display the calculated molarity.
+
+### Input Handling
+- Handles exceptions for invalid inputs and division by zero errors using tkinter `messagebox`.
+
+## Example
+Suppose we input:
+- Mass of Solute: 50 g
+- Molecular Weight: 100 g/mol
+- Volume of Solvent: 1 L
+
+The GUI will compute and display the molarity of the solution based on these inputs.
+
+## Required
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![tkinter](https://img.shields.io/badge/tkinter-Standard-green?style=for-the-badge)
+
+---
+
+
+# Protein Molecular Weight and Retention Checker
+
+## Overview
+This Python script calculates the molecular weight of a protein based on its amino acid sequence and determines if it would be retained or pass through a filter based on a Molecular Weight Cut-Off (MWCO) threshold.
+
+## Dependencies
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+
+## Installation
+1. Ensure Python 3.x is installed on your system.
+
+## Usage
+1. Run the script:
+   ```bash
+   python protein_molecular_weight_retention_checker.py
+   ```
+
+2. Enter the following inputs when prompted:
+   - Amino acid sequence of the protein
+   - Molecular Weight Cut-Off (MWCO) threshold (in Da)
+
+3. The script will compute:
+   - Molecular weight of the protein based on the provided amino acid sequence and amino acid weights.
+   - Determine if the protein would be "Retained" or "Pass Through" based on the MWCO threshold.
+
+4. The results will be displayed in the terminal.
+
+## Code Explanation
+### `calculate_molecular_weight`
+- Calculates the molecular weight of the protein using the provided amino acid sequence and amino acid weights dictionary.
+
+### `check_retention`
+- Checks if the calculated molecular weight of the protein is less than or equal to the MWCO threshold to determine if the protein would be retained or pass through.
+
+### Input Handling
+- Accepts user inputs for the amino acid sequence and MWCO threshold.
+- Ensures proper handling of inputs and calculations.
+
+## Flowchart
+```mermaid
+flowchart TD
+    A[Start] --> B[Input Amino Acid Sequence and MWCO Threshold]
+    B --> C[Calculate Molecular Weight]
+    C --> D[Check Retention]
+    D --> E[Output Molecular Weight and Retention Status]
+```
+
+## Example
+Suppose we input:
+- Amino Acid Sequence: "MAEGEITTFTALTEKFNLPPGNYKKPKLLYCSNGGHFLRILPDGTVDGTRDRSDQHIQLQLSAESVGEVYIKSTETGQYLAMDTSGLLYGSQTPSEECLFLERLEENHYNTYTSKKHAEKNWFVGLKKNGSCKRGPRTHYGQKAILFLPLPV"
+- MWCO Threshold: 30,000 Da
+
+The script will compute and display:
+- Molecular Weight of Protein: (calculated value) Da
+- Retention Status: Pass Through
+
+## Required
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+
+---
+
+# Nucleotide Codon Usage Calculator
+
+## Overview
+This Python script calculates codon usage frequencies for a given nucleotide sequence (DNA or RNA) and visualizes them using matplotlib and seaborn libraries. It provides insights into the distribution of codons within the sequence.
+
+## Dependencies
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![tkinter](https://img.shields.io/badge/tkinter-Latest-green?style=for-the-badge)
+- ![matplotlib](https://img.shields.io/badge/matplotlib-Latest-blue?style=for-the-badge)
+- ![seaborn](https://img.shields.io/badge/seaborn-Latest-blue?style=for-the-badge)
+
+## Installation
+1. Ensure Python 3.x is installed on your system.
+
+2. Install required libraries using pip:
+   ```bash
+   pip install matplotlib seaborn
+   ```
+
+## Usage
+1. Run the script:
+   ```bash
+   python nucleotide_codon_usage_calculator.py
+   ```
+
+2. Enter the nucleotide sequence (DNA or RNA) when prompted.
+
+3. Click on the "Analyze Sequence" button to calculate codon usage and visualize the results.
+
+4. A bar plot showing codon frequencies will be displayed.
+
+## Code Explanation
+### `calculate_codon_usage`
+- Splits the nucleotide sequence into codons.
+- Counts the occurrences of each codon and calculates their frequencies.
+
+### `plot_codon_usage`
+- Uses matplotlib and seaborn to create a bar plot of codon frequencies.
+- Enhances plot aesthetics and readability.
+
+### Input Handling
+- Validates and processes user input for the nucleotide sequence.
+- Displays a warning message if no sequence is entered.
+
+## Flowchart
+```mermaid
+flowchart TD
+    A[Start] --> B[Input Nucleotide Sequence]
+    B --> C[Calculate Codon Usage]
+    C --> D[Plot Codon Usage]
+    D --> E[Display Plot]
+```
+
+## Example
+Suppose we input:
+- Nucleotide Sequence: "ATGGTGCATCTGACTCCTGAGGAGAAGTCTGCCGTTACTGCCCTGTGGGGCAAGGTGAACGTGGATGAAGAAA"
+
+The script will compute codon usage frequencies and display a bar plot showing the distribution of codons within the sequence.
+
+## Required
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![tkinter](https://img.shields.io/badge/tkinter-Latest-green?style=for-the-badge)
+- ![matplotlib](https://img.shields.io/badge/matplotlib-Latest-blue?style=for-the-badge)
+- ![seaborn](https://img.shields.io/badge/seaborn-Latest-blue?style=for-the-badge)
+
+---
+
+# DNA Sequence Translation Tool
+
+## Overview
+This Python script translates a given DNA sequence into its corresponding protein sequence using Biopython's Seq module. It utilizes the `translate()` method to convert DNA codons into amino acids, providing the protein sequence as output.
+
+## Dependencies
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![Biopython](https://img.shields.io/badge/Biopython-Latest-green?style=for-the-badge)
+
+## Installation
+1. Ensure Python 3.x is installed on your system.
+
+2. Install Biopython using pip:
+   ```bash
+   pip install biopython
+   ```
+
+## Usage
+1. Run the script:
+   ```bash
+   python dna_sequence_translation_tool.py
+   ```
+
+2. Enter the DNA sequence when prompted.
+
+3. The script will translate the DNA sequence into its corresponding protein sequence and display the result.
+
+## Code Explanation
+### `translate_sequence`
+- Converts the input DNA sequence into a Biopython `Seq` object.
+- Uses the `translate()` method to generate the protein sequence from DNA codons.
+
+### Input Handling
+- Accepts user input for the DNA sequence.
+- Translates the sequence and outputs the resulting protein sequence.
+
+## Flowchart
+```mermaid
+flowchart TD
+    A[Start] --> B[Input DNA Sequence]
+    B --> C[Translate Sequence]
+    C --> D[Display Protein Sequence]
+```
+
+## Example
+Suppose we input:
+- DNA Sequence: "ATGGTGCATCTGACTCCTGAGGAGAAGTCTGCCGTTACTGCCCTGTGGGGCAAGGTGAACGTGGATGAAGAAA"
+
+The script will translate this DNA sequence into its corresponding protein sequence.
+
+## Required
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![Biopython](https://img.shields.io/badge/Biopython-Latest-green?style=for-the-badge)
+
+---
+
+
+# Advanced OD600 to Cell Density Calculator
+
+## Overview
+This Python script estimates cell density in cells/mL from OD600 readings using a specific conversion factor and path length of the cuvette. It provides an estimation based on the OD600 value, path length, and optional conversion factor, tailored for various cell types such as E. coli, yeast, or mammalian cells.
+
+## Dependencies
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![NumPy](https://img.shields.io/badge/NumPy-Latest-blue?style=for-the-badge)
+- ![pandas](https://img.shields.io/badge/pandas-Latest-green?style=for-the-badge)
+- ![Matplotlib](https://img.shields.io/badge/Matplotlib-Latest-blue?style=for-the-badge)
+
+## Installation
+1. Ensure Python 3.x is installed on your system.
+2. Install required libraries using pip:
+   ```bash
+   pip install numpy pandas matplotlib
+   ```
+
+## Usage
+1. Run the script:
+   ```bash
+   python od600_to_cell_density_calculator.py
+   ```
+
+2. Enter the OD600 reading, path length of the cuvette, conversion factor (optional), and the type of cells when prompted.
+
+3. The script will calculate and display the estimated cell density in cells/mL based on the provided inputs.
+
+## Code Explanation
+### `calculate_cell_density`
+- Computes the cell density from OD600 using the formula: \( \text{Cell Density} = \frac{\text{OD600}}{\text{Conversion Factor} \times \text{Path Length}} \times 10^7 \).
+- Raises a ValueError for non-positive OD600 or path length inputs.
+
+### Input Handling
+- Accepts user inputs for OD600, path length, conversion factor, and cell type.
+- Validates input values and calculates the cell density.
+
+### Output
+- Outputs the estimated cell density in cells/mL.
+
+## Flowchart
+```mermaid
+flowchart TD
+    A[Start] --> B[Input OD600]
+    B --> C[Input Path Length]
+    C --> D[Input Conversion Factor]
+    D --> E[Input Cell Type]
+    E --> F[Calculate Cell Density]
+    F --> G[Display Estimated Cell Density]
+```
+
+## Example
+Suppose we input:
+- OD600 Reading: 0.75
+- Path Length of Cuvette: 1.0 cm
+- Conversion Factor: 1.2
+- Type of Cells: E. coli
+
+The script will estimate the cell density and display the result.
+
+## Required
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![NumPy](https://img.shields.io/badge/NumPy-Latest-blue?style=for-the-badge)
+- ![pandas](https://img.shields.io/badge/pandas-Latest-green?style=for-the-badge)
+- ![Matplotlib](https://img.shields.io/badge/Matplotlib-Latest-blue?style=for-the-badge)
+
+---
+
+# PCR Efficiency Calculator
+
+## Overview
+This Python script calculates the PCR efficiency from cycle thresholds and template concentrations using linear regression on a standard curve. It provides an estimation of PCR efficiency based on input data points and visualizes the standard curve with a linear regression line.
+
+## Dependencies
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![NumPy](https://img.shields.io/badge/NumPy-Latest-blue?style=for-the-badge)
+- ![Matplotlib](https://img.shields.io/badge/Matplotlib-Latest-blue?style=for-the-badge)
+
+## Installation
+1. Ensure Python 3.x is installed on your system.
+2. Install required libraries using pip:
+   ```bash
+   pip install numpy matplotlib
+   ```
+
+## Usage
+1. Run the script:
+   ```bash
+   python pcr_efficiency_calculator.py
+   ```
+
+2. Enter the template concentrations and corresponding cycle thresholds when prompted. Ensure the data points are comma-separated.
+
+3. The script will calculate the PCR efficiency and display it. It will also plot the PCR standard curve with a linear regression line.
+
+## Code Explanation
+### `calculate_pcr_efficiency`
+- Computes PCR efficiency using linear regression on the log-transformed template concentrations and cycle thresholds.
+- Uses NumPy's `np.polyfit` to find the slope of the standard curve.
+- Efficiency (E) is calculated as \( E = 10^{\left(-1/m\right)} - 1 \), where \( m \) is the slope of the linear regression line.
+
+### `plot_standard_curve`
+- Plots the PCR standard curve using Matplotlib.
+- Scatter plots the data points (template concentrations vs. cycle thresholds) and overlays a linear regression line fitted on the log-transformed x-axis.
+
+### Input Handling
+- Accepts user inputs for template concentrations and cycle thresholds.
+- Validates input data to ensure both lists have the same length and contain at least two data points.
+
+### Output
+- Outputs the calculated PCR efficiency.
+- Displays a plot of the PCR standard curve with the linear regression line.
+
+## Flowchart
+```mermaid
+flowchart TD
+    A[Start] --> B[Input Template Concentrations]
+    B --> C[Input Cycle Thresholds]
+    C --> D[Validate Input Data]
+    D --> E[Calculate PCR Efficiency]
+    E --> F[Display PCR Efficiency]
+    E --> G[Plot Standard Curve]
+```
+
+## Example
+Suppose we input:
+- Template Concentrations: 1, 10, 100, 1000 ng/μL
+- Cycle Thresholds: 15, 20, 25, 30 cycles
+
+The script will calculate the PCR efficiency and visualize the standard curve.
+
+## Required
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+- ![NumPy](https://img.shields.io/badge/NumPy-Latest-blue?style=for-the-badge)
+- ![Matplotlib](https://img.shields.io/badge/Matplotlib-Latest-blue?style=for-the-badge)
+
+---
+# PCR Tm Calculator
+
+## Overview
+This Python script calculates the melting temperature (Tm) of PCR primers using the nearest-neighbor method. It estimates Tm based on the primer sequence, sodium concentration, and primer concentration input by the user. The Tm calculation incorporates thermodynamic parameters for dinucleotide interactions and salt adjustments.
+
+## Dependencies
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+  
+## Installation
+1. Ensure Python 3.x is installed on your system.
+2. No additional libraries are required beyond the Python standard library.
+
+## Usage
+1. Run the script:
+   ```bash
+   python pcr_tm_calculator.py
+   ```
+
+2. Follow the prompts to enter the primer sequence, sodium concentration (mM), and primer concentration (µM).
+
+3. The script will calculate and display the estimated Tm in Celsius.
+
+## Code Explanation
+### `calculate_tm`
+- Calculates the melting temperature (Tm) of a DNA primer sequence using the nearest-neighbor method.
+- Utilizes thermodynamic parameters (`dH` and `dS`) for dinucleotide interactions and adjustments for sodium and primer concentrations.
+
+### `validate_sequence`
+- Validates the primer sequence to ensure it only contains valid DNA bases (A, T, G, C).
+
+### Input Handling
+- Accepts user inputs for primer sequence, sodium concentration, and primer concentration.
+- Validates input values to ensure they meet specified criteria (e.g., non-negative sodium concentration, positive primer concentration).
+
+### Output
+- Outputs the calculated Tm for the entered primer sequence.
+
+## Flowchart
+```mermaid
+flowchart TD
+    A[Start] --> B[Input Primer Sequence]
+    B --> C[Validate Primer Sequence]
+    C -- Valid -- D[Input Sodium Concentration]
+    D --> E[Validate Sodium Concentration]
+    E -- Valid -- F[Input Primer Concentration]
+    F --> G[Validate Primer Concentration]
+    G -- Valid -- H[Calculate Tm]
+    H --> I[Display Tm]
+```
+
+## Example
+Suppose we input:
+- Primer Sequence: ATGCATGC
+- Sodium Concentration: 50 mM
+- Primer Concentration: 0.25 µM
+
+The script will calculate the Tm and display it.
+
+## Required
+- ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+
+---
+
