@@ -2189,18 +2189,19 @@ This Python script calculates the melting temperature (Tm) of PCR primers using 
 ### Output
 - Outputs the calculated Tm for the entered primer sequence.
 
-## Flowchart
+
 ```mermaid
 flowchart TD
     A[Start] --> B[Input Primer Sequence]
     B --> C[Validate Primer Sequence]
-    C -- Valid -- D[Input Sodium Concentration]
+    C -->|Valid| D[Input Sodium Concentration]
     D --> E[Validate Sodium Concentration]
-    E -- Valid -- F[Input Primer Concentration]
+    E -->|Valid| F[Input Primer Concentration]
     F --> G[Validate Primer Concentration]
-    G -- Valid -- H[Calculate Tm]
+    G -->|Valid| H[Calculate Tm]
     H --> I[Display Tm]
 ```
+
 
 ## Example
 Suppose we input:
