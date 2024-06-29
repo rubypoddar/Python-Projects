@@ -1250,13 +1250,15 @@ This Python script calculates the Förster Resonance Energy Transfer (FRET) effi
 - Prompts the user to input the distance and Förster distance.
 - Handles user input validation to ensure correct numeric inputs.
 
-### Flowchart
+
 ```mermaid
 flowchart TD
-    A[Start] --> B[Input Distance (Å) and Förster Distance (Å)]
+    A[Start] --> B[Input Distance and Förster Distance]
     B --> C[Calculate FRET Efficiency]
     C --> D[Display FRET Efficiency]
 ```
+
+
 
 ## Example
 Suppose we input:
@@ -1309,15 +1311,18 @@ This Python tkinter application calculates the extraction yield of DNA based on 
 - Ensures all input values are converted to `float` for numerical calculations.
 - Includes error handling for invalid input values to maintain program stability.
 
-### Flowchart
+
+
 ```mermaid
 flowchart TD
-    A[Start] --> B[Input Elution Buffer Volume (µL)]
-    B --> C[Input DNA Concentration (ng/µL)]
-    C --> D[Input Eluate Volume (µL)]
+    A[Start] --> B[Input Elution Buffer Volume]
+    B --> C[Input DNA Concentration]
+    C --> D[Input Eluate Volume]
     D --> E[Calculate Extraction Yield]
     E --> F[Display Extraction Yield]
 ```
+
+
 
 ## Example
 Suppose we input:
@@ -1782,15 +1787,18 @@ This Python tkinter application calculates the molarity of a solution based on u
 
 4. The GUI will display the calculated molarity in moles per liter (moles/L).
 
-## Flowchart
+
+
 ```mermaid
 flowchart TD
-    A[Start] --> B[Input Mass of Solute (g)]
-    B --> C[Input Molecular Weight (g/mol)]
-    C --> D[Input Volume of Solvent (L)]
-    D --> E[Calculate Molarity]
-    E --> F[Display Molarity]
+    A[Start] --> B["Input Mass of Solute (g)"]
+    B --> C["Input Molecular Weight (g/mol)"]
+    C --> D["Input Volume of Solvent (L)"]
+    D --> E["Calculate Molarity"]
+    E --> F["Display Molarity"]
 ```
+
+This should resolve the parsing error. Mermaid requires double quotes around labels containing spaces or special characters. If you need further assistance or adjustments, feel free to ask!
 
 ## Code Explanation
 ### `calculate_molarity`
@@ -2117,18 +2125,21 @@ This Python script calculates the PCR efficiency from cycle thresholds and templ
 - Outputs the calculated PCR efficiency.
 - Displays a plot of the PCR standard curve with the linear regression line.
 
-## Flowchart
+
 ```mermaid
 flowchart TD
-    A[Start] --> B[Input Template Concentrations]
-    B --> C[Input Cycle Thresholds]
-    C --> D[Validate Input Data]
-    D --> E[Calculate PCR Efficiency]
-    E --> F[Display PCR Efficiency]
-    E --> G[Plot Standard Curve]
+    A[Start] --> B["Input Primer Sequence"]
+    B --> C["Validate Primer Sequence"]
+    C -- Valid --> D["Input Sodium Concentration"]
+    D --> E["Validate Sodium Concentration"]
+    E -- Valid --> F["Input Primer Concentration"]
+    F --> G["Validate Primer Concentration"]
+    G -- Valid --> H["Calculate Tm"]
+    H --> I["Display Tm"]
 ```
 
-## Example
+
+
 Suppose we input:
 - Template Concentrations: 1, 10, 100, 1000 ng/μL
 - Cycle Thresholds: 15, 20, 25, 30 cycles
